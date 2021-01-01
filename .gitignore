@@ -1,0 +1,7 @@
+**/.idea/
+**/.ipynb_checkpoints/
+**/__pycache__/
+**/.vscode/
+**/*.ipynb
+**/.swp
+**/.DS_Store
