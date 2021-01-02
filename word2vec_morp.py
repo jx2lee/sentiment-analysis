@@ -1,6 +1,6 @@
 import pickle
-from core.prepo import *
 from tqdm import tqdm
+
 
 def random_batch(data, size):
     random_inputs = []
