@@ -119,7 +119,6 @@ def main(token_type):
                                           dict_nm='dictionary_'+token_type+'.pkl')
     logger.info(f'Finished inputs.\tlength {len(inputs)}')
     run_word2vec(path='output', input=inputs, dictionary=dictionary,
-                 #checkpoint_nm='/checkpoints/word2vec_' + token_type + '.ckpt',
                  checkpoint_nm=f'/checkpoints/{token_type}/word2vec_{token_type}.ckpt',
                  embedding_nm='/matrix/' + token_type + '.pkl')
     logger.info(f'Finished Word2vec {token_type}')
