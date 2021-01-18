@@ -56,7 +56,7 @@ def file_to_list(file_dir):
     pos_reviews = random.sample(pos_reviews, 45000)
 
     util_logger.info(
-        f"Created Lists. neg_reviews's length: {len(neg_reviews)}\t pos_reviews's length: {len(pos_reviews)}")
+        f"Created Lists. neg_reviews's length:\t{len(neg_reviews)}\t pos_reviews's length: {len(pos_reviews)}")
     return neg_reviews + pos_reviews
 
 
@@ -64,20 +64,20 @@ def load_pkl(pkl_path: str, pkl_name: str):
     with open(pkl_path + pkl_name, 'rb') as p:
         res = pickle.load(p)
 
-    util_logger.info(f'Loaded pkl. {pkl_path}{pkl_name}')
+    util_logger.info(f'Loaded pkl.\t{pkl_path}{pkl_name}')
     return res
 
 
 def save_pkl(pkl_path: str, pkl_name: str, save_object):
     with open(pkl_path + '/' + pkl_name, 'wb') as p:
         pickle.dump(save_object, p)
-    util_logger.info(f'Saved pkl. {pkl_path}/{pkl_name}')
+    util_logger.info(f'Saved pkl.\t{pkl_path}/{pkl_name}')
     return None
 
 
-def save_npz(npz_path: str, npz_name: str):
-    np.savez(npz_path + '/' + npz_name)
-    util_logger.info(f'Saved npz. {npz_path}/{npz_name}')
+def save_npz(npz_path: str, npz_name: str, arr: np.array):
+    np.savez_compressed(npz_path + '/' + npz_name, arr)
+    util_logger.info(f'Saved npz.\t{npz_path}/{npz_name}\t size:{os.path.getsize(npz_path + "/" + npz_name)}')
     return None
 
 
