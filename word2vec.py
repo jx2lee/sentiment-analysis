@@ -44,8 +44,8 @@ def array_to_df(x_arr, y_arr):
 
 
 def preprocess_input(path: str, x_nm: str, y_nm: str, dict_nm: str):
-    x = np.load(path + '/npz/' + x_nm, allow_pickle=True)['x']
-    y = np.load(path + '/npz/' + y_nm, allow_pickle=True)['y']
+    x = np.load(path + '/npz/' + x_nm, allow_pickle=True)['arr_0']
+    y = np.load(path + '/npz/' + y_nm, allow_pickle=True)['arr_0']
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
     inputs_df = pd.concat([array_to_df(x_train, y_train), array_to_df(x_test, y_test)], ignore_index=True)
