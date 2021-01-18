@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
-from utils import set_logger
+from utils import set_logger, folder_check
 import fire
 import numpy as np
 import pandas as pd
@@ -65,6 +65,7 @@ def preprocess_input(path: str, x_nm: str, y_nm: str, dict_nm: str):
 
 def run_word2vec(path: str, input: list, dictionary: dict, checkpoint_nm:str, embedding_nm):
     logger = set_logger('run-word2vec')
+    folder_check(dir_path=path, dir_name='checkpoints')
 
     # model
     training_epoch = 1000
