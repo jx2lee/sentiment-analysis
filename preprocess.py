@@ -13,7 +13,7 @@ def text_to_phoneme(text, save_dir):
     sp_text = []
     hangul = re.compile('[^\u3131-\u3163\uac00-\ud7a3]+')
     for split in text:
-        review = hangul.sub('', split_syllables(split))
+        review = hangul.sub(' ', split_syllables(split))
         if len(review) != 0:
             sp_text.append(review)
 
@@ -31,7 +31,6 @@ def text_to_phoneme(text, save_dir):
     label_phoneme = {i + 1: ch for i, ch in enumerate(unq_phoneme)}
 
     x = np.asarray([[phoneme_label[w] for w in sent if w in phoneme_label.keys()] for sent in sp_text])
-
     y_neg = [[1, 0] for _ in range(45000)]
     y_pos = [[0, 1] for _ in range(45000)]
     y = np.asarray(y_neg + y_pos)
@@ -46,8 +45,8 @@ def text_to_phoneme(text, save_dir):
     folder_check(dir_path=save_dir, dir_name='dictionary')
 
     # Save Array & Dictionary
-    save_npz(npz_path=save_dir + '/npz', npz_name='x_phoneme.npz')
-    save_npz(npz_path=save_dir + '/npz', npz_name='y_phoneme.npz')
+    save_npz(npz_path=save_dir + '/npz', npz_name='x_phoneme.npz', arr=x)
+    save_npz(npz_path=save_dir + '/npz', npz_name='y_phoneme.npz', arr=y)
     save_pkl(pkl_path=save_dir + '/dictionary', pkl_name='dictionary_phoneme.pkl', save_object=label_phoneme)
 
     return None
@@ -109,8 +108,8 @@ def text_to_morpheme(text, save_dir):
     folder_check(dir_path=save_dir, dir_name='dictionary')
 
     # Save Array & Dictionary
-    save_npz(npz_path=save_dir + '/npz', npz_name='x_morpheme.npz')
-    save_npz(npz_path=save_dir + '/npz', npz_name='y_morpheme.npz')
+    save_npz(npz_path=save_dir + '/npz', npz_name='x_morpheme.npz', arr=x)
+    save_npz(npz_path=save_dir + '/npz', npz_name='y_morpheme.npz', arr=y)
     save_pkl(pkl_path=save_dir + '/dictionary', pkl_name='dictionary_morpheme.pkl', save_object=label_morpheme)
 
     return None
@@ -170,8 +169,8 @@ def text_to_word(text, save_dir):
     folder_check(dir_path=save_dir, dir_name='dictionary')
 
     # Save Array & Dictionary
-    save_npz(npz_path=save_dir + '/npz', npz_name='x_word.npz')
-    save_npz(npz_path=save_dir + '/npz', npz_name='y_word.npz')
+    save_npz(npz_path=save_dir + '/npz', npz_name='x_word.npz', arr=x)
+    save_npz(npz_path=save_dir + '/npz', npz_name='y_word.npz', arr=y)
     save_pkl(pkl_path=save_dir + '/dictionary', pkl_name='dictionary_word.pkl', save_object=label_word)
 
     return None
