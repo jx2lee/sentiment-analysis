@@ -87,7 +87,7 @@ def text_to_morpheme(text, save_dir):
             morpheme_count[morpheme] = 1
 
     sorted_morpheme = sorted([(k, v) for k, v in morpheme_count.items()],
-                             key=lambda morpheme_count: -morpheme_count[1])[:10000]
+                             key=lambda morpheme_count: -morpheme_count[1])[:50000]
 
     label_morpheme = {i + 1: ch[0] for i, ch in enumerate(sorted_morpheme)}
     morpheme_label = {y: x for x, y in label_morpheme.items()}
@@ -148,7 +148,7 @@ def text_to_word(text, save_dir):
         else:
             word_count[word] = 1
     sorted_words = sorted([(k, v) for k, v in word_count.items()],
-                          key=lambda word_count: -word_count[1])[:40000]
+                          key=lambda word_count: -word_count[1])[:50000]
 
     label_word = {i + 1: ch[0] for i, ch in enumerate(sorted_words)}
     word_label = {y: x for x, y in label_word.items()}
