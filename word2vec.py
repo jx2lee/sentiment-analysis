@@ -74,7 +74,7 @@ def run_word2vec(path: str, input: list, dictionary: dict, checkpoint_nm:str, em
     embedding_size = 99
 
     num_sampled = 100
-    voc_size = len(dictionary)
+    voc_size = len(dictionary) + 1
 
     x = tf.placeholder(tf.int32, shape=[batch_size])
     y = tf.placeholder(tf.int32, shape=[batch_size, 1])
@@ -105,6 +105,7 @@ def run_word2vec(path: str, input: list, dictionary: dict, checkpoint_nm:str, em
         trained_embeddings = embeddings.eval()
 
     # save matrix
+    folder_check(path, 'matrix')
     with open(path + embedding_nm, 'wb') as p:
         pickle.dump(trained_embeddings, p)
         logger.info(f'Saved matrix.\tpath:{path}\t{path + embedding_nm}')
