@@ -76,24 +76,24 @@ def run_word2vec(path: str, input: list, dictionary: dict, checkpoint_nm:str, em
     num_sampled = 100
     voc_size = len(dictionary) + 1
 
-    x = tf.placeholder(tf.int32, shape=[batch_size])
-    y = tf.placeholder(tf.int32, shape=[batch_size, 1])
+    x = tf.compat.v1.placeholder(tf.int32, shape=[batch_size])
+    y = tf.compat.v1.placeholder(tf.int32, shape=[batch_size, 1])
 
-    embeddings = tf.Variable(tf.random_uniform([voc_size, embedding_size], -1.0, 1.0))
+    embeddings = tf.Variable(tf.random.uniform([voc_size, embedding_size], -1.0, 1.0))
     selected_embed = tf.nn.embedding_lookup(embeddings, x)
 
-    nce_weights = tf.Variable(tf.random_uniform([voc_size, embedding_size], -1.0, 1.0))
+    nce_weights = tf.Variable(tf.random.uniform([voc_size, embedding_size], -1.0, 1.0))
     nce_biases = tf.Variable(tf.zeros([voc_size]))
 
     loss = tf.reduce_mean(
         tf.nn.nce_loss(nce_weights, nce_biases, y, selected_embed, num_sampled, voc_size))
 
-    train_op = tf.train.AdamOptimizer(learning_rate).minimize(loss)
+    train_op = tf.compat.v1.train.AdamOptimizer(learning_rate).minimize(loss)
 
-    with tf.Session() as sess:
-        init = tf.global_variables_initializer()
+    with tf.compat.v1.Session() as sess:
+        init = tf.compat.v1.global_variables_initializer()
         sess.run(init)
-        saver = tf.train.Saver()
+        saver = tf.compat.v1.train.Saver()
         for step in range(1, training_epoch + 1):
             batch_inputs, batch_labels = random_batch(input, batch_size)
             _, loss_val = sess.run([train_op, loss],
