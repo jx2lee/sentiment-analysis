@@ -13,7 +13,7 @@ h5py==3.1.0
 hangul-utils==0.2
 idna==2.10
 importlib-metadata==3.3.0
-joblib==1.0.0
+joblib==1.2.0
 JPype1==1.2.0
 Keras==2.4.3
 Keras-Applications==1.0.8
